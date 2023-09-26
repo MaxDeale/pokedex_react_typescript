@@ -30,7 +30,7 @@ const PokemonContainer: React.FC<PokemonContainerProps> = ({
     // We will fetch our pokemon here
     const getPokeData = async () => {
       const apiUrl: string = "https://pokeapi.co/api/v2";
-      const limit: number = 5;
+      const limit: number = 52;
       const offset: number = 0;
       const url: string = `${apiUrl}/pokemon?limit=${limit}&offset=${offset}`;
 

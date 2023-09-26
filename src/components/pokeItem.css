@@ -6,6 +6,7 @@
   border-radius: 5px;
   padding: 15px;
   overflow: hidden;
+  margin: 20px 0;
 }
 .pokemon-card .pokemon-details {
   display: flex;
@@ -28,10 +29,14 @@
   padding: 3px;
 }
 .pokemon-card .pokemon-details p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin: 2px 0;
   background: white;
   padding: 3px;
   letter-spacing: 1px;
   border: 2px solid black;
   border-radius: 2px;
+}
+.pokemon-card .pokemon-details .abilities {
+  font-size: 12px;
 }/*# sourceMappingURL=pokeItem.css.map */

@@ -20,8 +20,13 @@ const PokemonItem: React.FC<Props> = ({ pokemon }) => {
       <div className="pokemon-details">
         <img src={pokemon.image} alt={pokemon.name} className="pokemon-image" />
         <h3>{pokemon.name}</h3>
-        <p>Types: {pokemon.types.join(", ")}</p>
-        <p>Abilities: {pokemon.abilities.join(", ")}</p>
+        <p>
+          {" "}
+          <span>Types:</span> {pokemon.types.join(", ")}
+        </p>
+        <p className="abilities">
+          <span>Abilities:</span> {pokemon.abilities.join(", ")}
+        </p>
       </div>
     </div>
   );
