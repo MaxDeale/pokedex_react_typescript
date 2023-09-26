@@ -2,8 +2,14 @@
   font-family: 'Luckiest Guy', cursive;
 }
 
+body{
+  margin:0;
+  padding: 5px;
+  background-color: rgb(255, 225, 205);
+}
+   
 .top-container {
-    margin: 0 auto;
+    margin: 20px auto;
     width: 25%;
     display: flex;
 
@@ -27,10 +33,15 @@
     width:25%;
     margin: 35px auto;
     letter-spacing: 2px;
+    background-color: rgb(81, 77, 77);
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    font-weight: bolder;
   }
 
 }
-
 
 .pokemon-container { 
   display: grid;
