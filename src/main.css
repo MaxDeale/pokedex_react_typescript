@@ -1,0 +1,33 @@
+* {
+  font-family: "Luckiest Guy", cursive;
+}
+
+.top-container {
+  margin: 0 auto;
+  width: 25%;
+  display: flex;
+}
+.top-container .main-logo-text {
+  margin: 0 auto;
+  align-self: center;
+  color: red;
+}
+.top-container img {
+  margin: 0 auto;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.outer-container {
+  width: 100%;
+}
+.outer-container h1 {
+  width: 25%;
+  margin: 35px auto;
+  letter-spacing: 2px;
+}
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}/*# sourceMappingURL=main.css.map */
