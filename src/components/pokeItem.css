@@ -1,19 +1,37 @@
 .pokemon-card {
   width: 200px;
-  height: 300px;
+  height: 320px;
   border: 3px solid rgb(216, 90, 90);
+  background: url("../assets/yyel.jpg");
   border-radius: 5px;
   padding: 15px;
+  overflow: hidden;
 }
 .pokemon-card .pokemon-details {
   display: flex;
   flex-direction: column;
   height: 30%;
 }
+.pokemon-card .pokemon-details img {
+  background: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  padding: 5px;
+}
 .pokemon-card .pokemon-details h3 {
   color: red;
-  margin: 5px 0;
+  margin: 5px auto;
+  background: rgb(77, 73, 73);
+  width: 70%;
+  text-align: center;
+  border-radius: 7px;
+  padding: 3px;
 }
 .pokemon-card .pokemon-details p {
-  margin: 0;
+  margin: 2px 0;
+  background: white;
+  padding: 2px;
+  letter-spacing: 1px;
+  border: 2px solid black;
+  border-radius: 2px;
 }/*# sourceMappingURL=pokeItem.css.map */
