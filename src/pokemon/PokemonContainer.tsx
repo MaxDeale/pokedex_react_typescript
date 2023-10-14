@@ -8,6 +8,12 @@ interface Ability {
   };
 }
 
+interface PokemonType {
+  type: {
+    name: string;
+  }
+}
+
 interface Pokemon {
   id: number;
   name: string;
@@ -58,7 +64,7 @@ const PokemonContainer: React.FC<PokemonContainerProps> = ({
             }
             const pokemonData = await response.json();
             const types = pokemonData.types.map(
-              (type: { type: { name: string } }) => type.type.name
+              ({ type }: PokemonType  ) => type.name
             );
             const abilities = pokemonData.abilities.map(
               ({ ability }: Ability) => ability.name
