@@ -1,27 +1,25 @@
 import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ auth, setIsRegistered, setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const auth = getAuth();
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+      await createUserWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
           const user = userCredential.user;
-          console.log(user, "has been signed up");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error(errorCode, errorMessage);
-        });
-      // You can redirect the user to another page upon successful registration.
-      // maybe use state management for login state or can use fb?
+          setIsRegistered(true);
+          setIsLoggedIn(true);
+          console.log(user.email, "has been signed up");
+          navigate("/");
+        }
+      );
     } catch (error) {
+      setIsRegistered(false);
       console.error(error);
     }
   };

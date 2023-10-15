@@ -1,7 +1,7 @@
- import { initializeApp } from 'firebase/app';
+const key = 'AIzaSyDGB5_ZQ0cWlA2WY0HDyhVuF-qIHPG_K-k'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDGB5_ZQ0cWlA2WY0HDyhVuF-qIHPG_K-k",
+export const firebaseConfig = {
+  apiKey: key,
   authDomain: "pokemon-dd-app.firebaseapp.com",
   projectId: "pokemon-dd-app",
   storageBucket: "pokemon-dd-app.appspot.com",
@@ -9,5 +9,3 @@ const firebaseConfig = {
   appId: "1:22899143142:web:373b8e19f3278b0984a627"
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = app.auth();

@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-const Login = () => {
+const Login = ({ auth, setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const auth = getAuth();
-
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+      await signInWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
           const user = userCredential.user;
-          console.log(user, "has been signed in");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
-        });
-      // You can redirect the user to another page upon successful login.
+          console.log(user.email, "has been signed in");
+        }
+      );
+      setIsLoggedIn(true);
     } catch (error) {
       console.error(error);
+      setIsLoggedIn(false);
     }
   };
 
