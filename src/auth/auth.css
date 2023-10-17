@@ -1,0 +1,18 @@
+.auth-container {
+  letter-spacing: 1px;
+  display: flex;
+  margin: 5% auto;
+  justify-content: space-between;
+  width: 40%;
+}
+.auth-container input {
+  font-size: larger;
+}
+.auth-container button {
+  padding: 2rem;
+  border-radius: 50%;
+  border: 2px solid black;
+  background-color: red;
+  color: white;
+  font-size: larger;
+}/*# sourceMappingURL=auth.css.map */

@@ -15,17 +15,18 @@ interface Props {
 }
 
 const PokemonItem: React.FC<Props> = ({ pokemon }) => {
+  const { name, image, types, abilities } = pokemon;
   return (
     <div className="pokemon-card">
       <div className="pokemon-details">
-        <img src={pokemon.image} alt={pokemon.name} className="pokemon-image" />
-        <h3>{pokemon.name}</h3>
+        <img src={image} alt={name} className="pokemon-image" />
+        <h3>{name}</h3>
         <p>
           {" "}
-          <span>Types:</span> {pokemon.types.join(", ")}
+          <span>Types:</span> {types.join(", ")}
         </p>
         <p className="abilities">
-          <span>Abilities:</span> {pokemon.abilities.join(", ")}
+          <span>Abilities:</span> {abilities.join(", ")}
         </p>
       </div>
     </div>

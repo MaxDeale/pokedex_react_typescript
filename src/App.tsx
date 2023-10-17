@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import "./main.css";
 import pokepic from "./assets/pokeball.png";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"; // Import Link
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import PokemonContainer from "./pokemon/PokemonContainer";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 
 function App() {
   const initialPokemons = [
@@ -22,34 +28,63 @@ function App() {
   const auth = getAuth();
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [user, setUser] = useState("");
   const HomePage = () => (
     <div>
-      <div className="top-container">
-        <img src={pokepic} alt="nopic" />
-        <h1 className="main-logo-text">Pokedex App</h1>
-      </div>
-      <PokemonContainer initialPokemons={initialPokemons} />
+      <PokemonContainer initialPokemons={initialPokemons} user={user} />
     </div>
   );
 
-  return (
-    <div className="App">
-      <Router>
+  const Navigation = () => {
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        setIsLoggedIn(false);
+        setUser("");
+        navigate("/login");
+      } catch (error) {
+        console.error("Error logging out:", error);
+      }
+    };
+
+    return (
+      <div className="top-container">
+        <img src={pokepic} alt="nopic" />
+        <h1 className="main-logo-text">Pokedex App</h1>
         <nav>
           <ul>
             <li>
               <Link to="/login">Login</Link>
             </li>
+            {isLoggedIn && (
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            )}
             <li>
               <Link to="/register">Register</Link>
             </li>
           </ul>
         </nav>
+      </div>
+    );
+  };
+
+  return (
+    <div className="App">
+      <Router>
+        <Navigation />
         <Routes>
           <Route
             path="/login"
-            element={<Login auth={auth} setIsLoggedIn={setIsLoggedIn} />}
+            element={
+              <Login
+                auth={auth}
+                setIsLoggedIn={setIsLoggedIn}
+                setUser={setUser}
+              />
+            }
           />
           <Route
             path="/register"
@@ -58,6 +93,7 @@ function App() {
                 auth={auth}
                 setIsRegistered={setIsRegistered}
                 setIsLoggedIn={setIsLoggedIn}
+                setUser={setUser}
               />
             }
           />
@@ -68,13 +104,18 @@ function App() {
                 isLoggedIn ? (
                   <HomePage />
                 ) : (
-                  <Login auth={auth} setIsLoggedIn={setIsLoggedIn} />
+                  <Login
+                    auth={auth}
+                    setIsLoggedIn={setIsLoggedIn}
+                    setUser={setUser}
+                  />
                 )
               ) : (
                 <Register
                   auth={auth}
                   setIsRegistered={setIsRegistered}
                   setIsLoggedIn={setIsLoggedIn}
+                  setUser={setUser}
                 />
               )
             }

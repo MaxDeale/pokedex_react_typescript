@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
-const Register = ({ auth, setIsRegistered, setIsLoggedIn }) => {
+const Register = ({ auth, setIsRegistered, setIsLoggedIn, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleRegister = async () => {
@@ -12,8 +14,10 @@ const Register = ({ auth, setIsRegistered, setIsLoggedIn }) => {
       await createUserWithEmailAndPassword(auth, email, password).then(
         (userCredential) => {
           const user = userCredential.user;
+          console.log("user", user);
           setIsRegistered(true);
           setIsLoggedIn(true);
+          setUser(user.email);
           console.log(user.email, "has been signed up");
           navigate("/");
         }
@@ -25,8 +29,8 @@ const Register = ({ auth, setIsRegistered, setIsLoggedIn }) => {
   };
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
+    <div className="auth-container">
+      <h2>Register:</h2>
       <input
         type="email"
         placeholder="Email"
@@ -39,7 +43,7 @@ const Register = ({ auth, setIsRegistered, setIsLoggedIn }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleRegister}>Register</button>
+      <button onClick={handleRegister}>Go</button>
     </div>
   );
 };

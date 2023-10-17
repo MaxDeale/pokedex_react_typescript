@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PokemonItem from "./PokemonItem";
-import "../main.css";
+import "./pokemon_container.css";
 
 interface Ability {
   ability: {
@@ -23,12 +23,18 @@ interface Pokemon {
   image: string;
 }
 
+//want whole user object? 
+// interface User {
+//   email: string;
+// }
+
 interface PokemonContainerProps {
   initialPokemons: Pokemon[];
+  user: string
 }
 
 const PokemonContainer: React.FC<PokemonContainerProps> = ({
-  initialPokemons,
+  initialPokemons, user
 }) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>(initialPokemons);
 
@@ -55,7 +61,7 @@ const PokemonContainer: React.FC<PokemonContainerProps> = ({
           types: string[];
         }[] = data.results;
 
-        // Fetch and set the types for each Pokémon
+        // Fetch and set the types and abilities for each Pokémon
         const updatedPokemonList = await Promise.all(
           pokemonList.map(async (pokemon) => {
             const response = await fetch(pokemon.url);
@@ -88,7 +94,7 @@ const PokemonContainer: React.FC<PokemonContainerProps> = ({
 
   return (
     <div className="outer-container">
-      <h1>Pokemon Collection</h1>
+      <h1>Pokemon Collection of <span>{user}</span></h1>
       <div className="pokemon-container">
         {pokemons.map((pokemon, index) => (
           <PokemonItem key={index} pokemon={pokemon} />
