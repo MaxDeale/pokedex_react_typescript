@@ -15,9 +15,9 @@ const Login = ({ auth, setIsLoggedIn, setUser }) => {
         (userCredential) => {
           const user = userCredential.user;
           setUser(user.email);
+          navigate("/");
           setIsLoggedIn(true);
           console.log(user.email, "has been signed in");
-          navigate("/");
         }
       );
     } catch (error) {

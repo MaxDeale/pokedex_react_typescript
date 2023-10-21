@@ -3,16 +3,26 @@
   display: flex;
   margin: 5% auto;
   justify-content: space-between;
-  width: 40%;
+  align-items: center;
+  width: 43%;
 }
 .auth-container input {
   font-size: larger;
+  padding: 2rem 5px;
+  border-radius: 5px;
 }
 .auth-container button {
   padding: 2rem;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 3px solid black;
   background-color: red;
-  color: white;
+  color: yellow;
   font-size: larger;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+.auth-container button:hover {
+  transform: scale(1.1);
+  color: black;
+  border-color: yellow;
 }/*# sourceMappingURL=auth.css.map */

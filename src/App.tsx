@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import "./main.css";
 import pokepic from "./assets/pokeball.png";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import PokemonContainer from "./pokemon/PokemonContainer";
@@ -36,13 +30,12 @@ function App() {
   );
 
   const Navigation = () => {
-    const navigate = useNavigate();
     const handleLogout = async () => {
       try {
         await signOut(auth);
         setIsLoggedIn(false);
         setUser("");
-        navigate("/login");
+        console.log(user, "has been logged out");
       } catch (error) {
         console.error("Error logging out:", error);
       }
@@ -54,12 +47,14 @@ function App() {
         <h1 className="main-logo-text">Pokedex App</h1>
         <nav>
           <ul>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            {isLoggedIn && (
+            {!isLoggedIn && (
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
+            {isLoggedIn && (
+              <li onClick={handleLogout}>
+                <Link to="/login">Logout</Link>
               </li>
             )}
             <li>

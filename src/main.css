@@ -22,28 +22,25 @@ body {
   margin: 0 auto;
   width: 100px;
   border-radius: 50%;
+  transition: all 1s ease-in-out;
 }
-
-.outer-container {
-  width: 100%;
+.top-container img:hover {
+  transform: rotate(360deg);
 }
-.outer-container h1 {
-  width: 25%;
-  margin: 35px auto;
-  letter-spacing: 2px;
-  background-color: rgb(81, 77, 77);
+.top-container nav ul li {
+  list-style-type: none;
+  margin: 5px auto;
+  background: rgb(77, 73, 73);
   text-align: center;
-  border: 2px solid white;
-  border-radius: 4px;
-  color: white;
-  font-weight: bolder;
+  border-radius: 7px;
+  padding: 5px;
 }
-
-.pokemon-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+.top-container nav ul li a {
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: red;
 }
-
-.register-container {
-  display: flex;
+.top-container nav ul li a:hover {
+  color: yellow;
 }/*# sourceMappingURL=main.css.map */
