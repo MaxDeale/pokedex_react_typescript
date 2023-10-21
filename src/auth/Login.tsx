@@ -1,11 +1,21 @@
-import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, ReactElement } from "react";
+import { signInWithEmailAndPassword, Auth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 
-const Login = ({ auth, setIsLoggedIn, setUser }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+interface LoginProps {
+  auth: Auth;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+  setUser: (user: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({
+  auth,
+  setIsLoggedIn,
+  setUser,
+}: LoginProps): ReactElement => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
