@@ -6,12 +6,14 @@ import "./auth.css";
 interface LoginProps {
   auth: Auth;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
+  setIsRegistered: (isRegistered: boolean) => void;
   setUser: (user: string) => void;
 }
 
 const Login: React.FC<LoginProps> = ({
   auth,
   setIsLoggedIn,
+  setIsRegistered,
   setUser,
 }: LoginProps): ReactElement => {
   const [email, setEmail] = useState<string>("");
@@ -25,8 +27,9 @@ const Login: React.FC<LoginProps> = ({
         (userCredential) => {
           const user = userCredential.user;
           setUser(user.email);
-          navigate("/");
           setIsLoggedIn(true);
+          setIsRegistered(true);
+          navigate("/");
           console.log(user.email, "has been signed in");
         }
       );

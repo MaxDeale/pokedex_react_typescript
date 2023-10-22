@@ -23,6 +23,7 @@ function App() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState("");
+
   const HomePage = () => (
     <div>
       <PokemonContainer initialPokemons={initialPokemons} user={user} />
@@ -66,32 +67,31 @@ function App() {
     );
   };
 
+  const LoginComponent = (
+    <Login
+      auth={auth}
+      setIsLoggedIn={setIsLoggedIn}
+      setIsRegistered={setIsRegistered}
+      setUser={setUser}
+    />
+  );
+
+  const RegisterComponent = (
+    <Register
+      auth={auth}
+      setIsLoggedIn={setIsLoggedIn}
+      setIsRegistered={setIsRegistered}
+      setUser={setUser}
+    />
+  );
+
   return (
     <div className="App">
       <Router>
         <Navigation />
         <Routes>
-          <Route
-            path="/login"
-            element={
-              <Login
-                auth={auth}
-                setIsLoggedIn={setIsLoggedIn}
-                setUser={setUser}
-              />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Register
-                auth={auth}
-                setIsRegistered={setIsRegistered}
-                setIsLoggedIn={setIsLoggedIn}
-                setUser={setUser}
-              />
-            }
-          />
+          <Route path="/login" element={LoginComponent} />
+          <Route path="/register" element={RegisterComponent} />
           <Route
             path="/"
             element={
@@ -99,19 +99,10 @@ function App() {
                 isLoggedIn ? (
                   <HomePage />
                 ) : (
-                  <Login
-                    auth={auth}
-                    setIsLoggedIn={setIsLoggedIn}
-                    setUser={setUser}
-                  />
+                  LoginComponent
                 )
               ) : (
-                <Register
-                  auth={auth}
-                  setIsRegistered={setIsRegistered}
-                  setIsLoggedIn={setIsLoggedIn}
-                  setUser={setUser}
-                />
+                RegisterComponent
               )
             }
           />

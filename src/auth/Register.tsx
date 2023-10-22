@@ -26,7 +26,6 @@ const Register: React.FC<RegisterProps> = ({
       await createUserWithEmailAndPassword(auth, email, password).then(
         (userCredential) => {
           const user = userCredential.user;
-          console.log("user", user);
           setIsRegistered(true);
           setIsLoggedIn(true);
           setUser(user.email);
