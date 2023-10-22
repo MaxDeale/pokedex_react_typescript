@@ -1,34 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PokemonItem from "./PokemonItem";
 import "./pokemon_container.css";
+import {
+  Ability,
+  PokemonType,
+  Pokemon,
+  AvailablePokemonProps,
+} from "../types/types";
 
-interface Ability {
-  ability: {
-    name: string;
-  };
-}
-
-interface PokemonType {
-  type: {
-    name: string;
-  };
-}
-
-interface Pokemon {
-  id: number;
-  name: string;
-  url: string;
-  types: string[];
-  abilities: string[];
-  image: string;
-}
-
-interface PokemonContainerProps {
-  initialPokemons: Pokemon[];
-  user: string;
-}
-
-const PokemonContainer: React.FC<PokemonContainerProps> = ({
+const AvailablePokemon: React.FC<AvailablePokemonProps> = ({
   initialPokemons,
   user,
 }) => {
@@ -102,4 +82,4 @@ const PokemonContainer: React.FC<PokemonContainerProps> = ({
   );
 };
 
-export default PokemonContainer;
+export default AvailablePokemon;

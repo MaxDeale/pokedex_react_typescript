@@ -4,7 +4,7 @@ import pokepic from "./assets/pokeball.png";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-import PokemonContainer from "./pokemon/PokemonContainer";
+import AvailablePokemon from "./pokemon/AvailablePokemon";
 import { getAuth, signOut } from "firebase/auth";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 
   const HomePage = () => (
     <div>
-      <PokemonContainer initialPokemons={initialPokemons} user={user} />
+      <AvailablePokemon initialPokemons={initialPokemons} user={user} />
     </div>
   );
 

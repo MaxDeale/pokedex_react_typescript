@@ -1,21 +1,15 @@
 import React, { useState, ReactElement } from "react";
-import { createUserWithEmailAndPassword, Auth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
+import { AuthProps } from "../types/types";
 
-interface RegisterProps {
-  auth: Auth;
-  setIsRegistered: (isRegistered: boolean) => void;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
-  setUser: (user: string) => void;
-}
-
-const Register: React.FC<RegisterProps> = ({
+const Register: React.FC<AuthProps> = ({
   auth,
   setIsRegistered,
   setIsLoggedIn,
   setUser,
-}: RegisterProps): ReactElement => {
+}: AuthProps): ReactElement => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
