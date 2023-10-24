@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PokemonItem from "./PokemonItem";
 import "./pokemon_container.css";
-import { Pokemon, AvailablePokemonProps } from "../types/types";
+import { Pokemon, UserPokemonProps } from "../types/types";
 
-const UserPokemon: React.FC<AvailablePokemonProps> = ({
-  initialPokemons,
-  user,
-}) => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>(initialPokemons);
+const UserPokemon: React.FC<UserPokemonProps> = ({ user }) => {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     // We will fetch our pokemon here

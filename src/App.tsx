@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AvailablePokemon from "./pokemon/AvailablePokemon";
+import UserPokemon from "./pokemon/UserPokemon";
 import { getAuth, signOut } from "firebase/auth";
 
 function App() {
@@ -63,6 +64,12 @@ function App() {
             <li>
               <Link to="/register">Register</Link>
             </li>
+            <li>
+              <Link to="/collection">Collection</Link>
+            </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -87,6 +94,8 @@ function App() {
     />
   );
 
+  const CollectionComponent = <UserPokemon user={user} />;
+
   return (
     <div className="App">
       <Router>
@@ -94,6 +103,7 @@ function App() {
         <Routes>
           <Route path="/login" element={LoginComponent} />
           <Route path="/register" element={RegisterComponent} />
+          <Route path="/collection" element={CollectionComponent} />
           <Route
             path="/"
             element={

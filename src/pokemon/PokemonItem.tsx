@@ -2,6 +2,7 @@ import React from "react";
 import "./pokeItem.css";
 import { PokemonItemProps, Pokemon } from "../types/types";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+
 const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon }) => {
   const { name, image, types, abilities } = pokemon;
   const db = getFirestore();
@@ -12,6 +13,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon }) => {
     addDoc(collection(db, "pokemon"), pokemon)
       .then((docRef) => {
         console.log("Document added with ID: ", docRef.id);
+        alert(pokemon.name + " successfully added!");
       })
       .catch((error) => {
         console.error("Error adding document: ", error);

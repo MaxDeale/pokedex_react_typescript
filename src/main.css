@@ -10,8 +10,8 @@ body {
 
 .top-container {
   margin: 20px auto;
-  width: 25%;
   display: flex;
+  width: 35%;
 }
 .top-container .main-logo-text {
   margin: 0 auto;
@@ -20,9 +20,9 @@ body {
 }
 .top-container img {
   margin: 0 auto;
-  width: 100px;
   border-radius: 50%;
   transition: all 1s ease-in-out;
+  width: 200px;
 }
 .top-container img:hover {
   transform: rotate(360deg);

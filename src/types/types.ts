@@ -26,7 +26,6 @@ export interface PokemonType {
 export interface Pokemon {
   id: number;
   name: string;
-  url: string;
   types: string[];
   abilities: string[];
   image: string;
@@ -38,5 +37,9 @@ export interface PokemonItemProps {
 
 export interface AvailablePokemonProps {
   initialPokemons: Pokemon[];
+  user: string;
+}
+
+export interface UserPokemonProps {
   user: string;
 }
