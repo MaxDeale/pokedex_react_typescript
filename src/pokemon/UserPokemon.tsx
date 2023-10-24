@@ -34,7 +34,7 @@ const UserPokemon: React.FC<AvailablePokemonProps> = ({
   return (
     <div className="outer-container">
       <h1>
-        Pokemon Collection of <span>{user}</span>
+        Pokemon Collection of <span style={{ color: "yellow" }}>{user}</span>
       </h1>
       <div className="pokemon-container">
         {pokemons.map((pokemon, index) => (

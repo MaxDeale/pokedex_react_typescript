@@ -28,6 +28,7 @@ const Login: React.FC<AuthProps> = ({
         }
       );
     } catch (error) {
+      alert(error);
       console.error(error);
       setIsLoggedIn(false);
     }

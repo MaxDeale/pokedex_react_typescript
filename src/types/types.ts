@@ -30,6 +30,10 @@ export interface Pokemon {
   types: string[];
   abilities: string[];
   image: string;
+  user: string;
+}
+export interface PokemonItemProps {
+  pokemon: Pokemon;
 }
 
 export interface AvailablePokemonProps {

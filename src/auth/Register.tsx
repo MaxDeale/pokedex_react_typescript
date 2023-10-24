@@ -29,6 +29,7 @@ const Register: React.FC<AuthProps> = ({
       );
     } catch (error) {
       setIsRegistered(false);
+      alert(error);
       console.error(error);
     }
   };

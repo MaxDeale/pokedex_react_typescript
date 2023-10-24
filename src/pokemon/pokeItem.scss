@@ -1,6 +1,6 @@
 .pokemon-card {
     width: 200px;
-    height: 320px;
+    height: 350px;
     border: 3px solid rgb(216, 90, 90);
     background: url('../assets/yyel.jpg');
     border-radius: 5px;
@@ -40,8 +40,24 @@
         border: 2px solid black;
         border-radius: 2px;
       }
+      
       .abilities{
         font-size: 12px;
+      }
+
+      .add-pokemon-button{
+        padding: 0.2rem;
+        margin: 1rem auto;
+        width: 120px;
+        background-color: yellow;
+        border-color: red;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+           border-color: black;
+           color: red;
+        }
       }
     }
   }

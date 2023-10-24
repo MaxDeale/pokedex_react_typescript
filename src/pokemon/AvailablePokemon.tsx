@@ -53,7 +53,7 @@ const AvailablePokemon: React.FC<AvailablePokemonProps> = ({
             );
             const { sprites } = pokemonData;
             const image = sprites.front_shiny;
-            return { ...pokemon, types, abilities, image };
+            return { ...pokemon, types, abilities, image, user };
           })
         );
 
@@ -66,13 +66,11 @@ const AvailablePokemon: React.FC<AvailablePokemonProps> = ({
 
     // Call the async function
     getPokeData();
-  }, []); // Empty dependency array to run this effect only once
+  }, [user]); // Empty dependency array to run this effect only once
 
   return (
     <div className="outer-container">
-      <h1>
-        Pokemon Collection of <span>{user}</span>
-      </h1>
+      <h1>Available Pokemon</h1>
       <div className="pokemon-container">
         {pokemons.map((pokemon, index) => (
           <PokemonItem key={index} pokemon={pokemon} />

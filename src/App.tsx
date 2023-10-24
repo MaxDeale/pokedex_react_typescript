@@ -16,6 +16,7 @@ function App() {
       url: "http://",
       abilities: ["smash"],
       image: "wewesd",
+      user: "",
     },
   ];
 
@@ -38,6 +39,7 @@ function App() {
         setUser("");
         console.log(user, "has been logged out");
       } catch (error) {
+        alert(error);
         console.error("Error logging out:", error);
       }
     };
