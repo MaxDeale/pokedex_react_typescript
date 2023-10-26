@@ -33,6 +33,7 @@ export interface Pokemon {
 }
 export interface PokemonItemProps {
   pokemon: Pokemon;
+  flow: string;
 }
 
 export interface AvailablePokemonProps {

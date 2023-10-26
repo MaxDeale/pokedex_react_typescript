@@ -73,7 +73,7 @@ const AvailablePokemon: React.FC<AvailablePokemonProps> = ({
       <h1>Available Pokemon</h1>
       <div className="pokemon-container">
         {pokemons.map((pokemon, index) => (
-          <PokemonItem key={index} pokemon={pokemon} />
+          <PokemonItem key={index} pokemon={pokemon} flow='available' />
         ))}
       </div>
     </div>
