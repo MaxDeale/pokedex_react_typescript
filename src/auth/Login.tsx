@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { AuthProps } from "../types/types";
+import { toast } from "react-toastify";
 
 const Login: React.FC<AuthProps> = ({
   auth,
@@ -14,6 +15,12 @@ const Login: React.FC<AuthProps> = ({
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
+
+  const loginErrorNotification = (error) => {
+    toast.error(`Login error: ${error}`, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
   const handleLogin = async () => {
     try {
@@ -28,7 +35,7 @@ const Login: React.FC<AuthProps> = ({
         }
       );
     } catch (error) {
-      alert(error);
+      loginErrorNotification(error);
       console.error(error);
       setIsLoggedIn(false);
     }

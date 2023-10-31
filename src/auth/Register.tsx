@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./auth.css";
 import { AuthProps } from "../types/types";
+import { toast } from "react-toastify";
 
 const Register: React.FC<AuthProps> = ({
   auth,
@@ -14,6 +15,12 @@ const Register: React.FC<AuthProps> = ({
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
+
+  const registerErrorNotification = (error) => {
+    toast.error(`Registration error: ${error}`, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
   const handleRegister = async () => {
     try {
@@ -29,7 +36,7 @@ const Register: React.FC<AuthProps> = ({
       );
     } catch (error) {
       setIsRegistered(false);
-      alert(error);
+      registerErrorNotification(error);
       console.error(error);
     }
   };

@@ -11,6 +11,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const PokemonItem: React.FC<PokemonItemProps> = ({
   pokemon,
@@ -22,6 +23,18 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
   const db = getFirestore();
 
   const [owned, setIsOwned] = useState(false);
+
+  const addPokemonSuccessNotification = (pokemon) => {
+    toast.success(`${pokemon} added to your collection`, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  const removePokemonSuccessNotification = (pokemon) => {
+    toast.success(`${pokemon} removed from your collection`, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
   useEffect(() => {
     const checkIfPokemonInCollection = async (
@@ -46,7 +59,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
       .then(() => {
         // Call the onAdd function passed from the parent component
         onAdd(pokemon);
-        alert(pokemon.name + " successfully added!");
+        addPokemonSuccessNotification(pokemon.name);
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -73,7 +86,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
       const pokemonDoc = querySnapshot.docs[0];
 
       await deleteDoc(pokemonDoc.ref);
-      alert(pokemonName + " successfully removed!");
+      removePokemonSuccessNotification(pokemonName);
 
       // Call the onRemove function passed from the parent component
       onRemove(pokemonName);

@@ -15,6 +15,9 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 function App() {
   const auth = getAuth();
@@ -103,13 +106,18 @@ function App() {
   }, [db, user]);
 
   const handleLogout = async () => {
+    const loginErrorNotification = (error) => {
+      toast.error(`Registration error: ${error}`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    };
     try {
       await signOut(auth);
       setIsLoggedIn(false);
       setUser("");
       console.log(user, "has been logged out");
     } catch (error) {
-      alert(error);
+      loginErrorNotification(error);
       console.error("Error logging out:", error);
     }
   };
@@ -164,6 +172,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
         <div className="top-container">
           <img src={pokepic} alt="nopic" />
