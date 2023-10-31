@@ -1,18 +1,30 @@
 import React from "react";
 import "./pokeItem.css";
 import { PokemonItemProps, Pokemon } from "../types/types";
-import { getFirestore, collection, addDoc, deleteDoc, query, where, getDocs, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  deleteDoc,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
-const PokemonItem: React.FC<PokemonItemProps> = ({ pokemon, flow }) => {
-  const { name, image, types, abilities, id } = pokemon;
+const PokemonItem: React.FC<PokemonItemProps> = ({
+  pokemon,
+  flow,
+  onRemove,
+  onAdd,
+}) => {
+  const { name, image, types, abilities } = pokemon;
   const db = getFirestore();
-console.log('id', id)
-  const handleAddPokemon = (pokemon: Pokemon): void => {
-    console.log("handleAddPokemon", pokemon);
 
+  const handleAddPokemon = (pokemon: Pokemon): void => {
     addDoc(collection(db, "pokemon"), pokemon)
       .then((docRef) => {
-        console.log("Document added with ID: ", docRef.id);
+        // Call the onAdd function passed from the parent component
+        onAdd(pokemon);
         alert(pokemon.name + " successfully added!");
       })
       .catch((error) => {
@@ -22,12 +34,14 @@ console.log('id', id)
 
   const handleRemovePokemon = async (pokemonName: string): Promise<void> => {
     try {
+      // Get a reference to the "pokemon" collection
+      const pokemonCollection = collection(db, "pokemon");
+
       // Find the document reference for the Pokemon with the specified name
       const pokemonQuery = query(
-        collection(db, "pokemon"),
+        pokemonCollection,
         where("name", "==", pokemonName)
       );
-
       const querySnapshot = await getDocs(pokemonQuery);
 
       if (querySnapshot.docs.length === 0) {
@@ -37,11 +51,16 @@ console.log('id', id)
 
       const pokemonDoc = querySnapshot.docs[0];
 
-      // Delete the document
-      await deleteDoc(doc(db, "pokemon", pokemonDoc.id));
+      // Delete the document using its reference
+      await deleteDoc(pokemonDoc.ref);
 
-      console.log("Pokemon with name " + pokemonName + " successfully removed.");
+      console.log(
+        "Pokemon with name " + pokemonName + " successfully removed."
+      );
       alert(pokemonName + " successfully removed!");
+
+      // Call the onRemove function passed from the parent component
+      onRemove(pokemonName);
     } catch (error) {
       console.error("Error removing document: ", error);
     }

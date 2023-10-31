@@ -34,13 +34,14 @@ export interface Pokemon {
 export interface PokemonItemProps {
   pokemon: Pokemon;
   flow: string;
+  onRemove?: Function;
+  onAdd?: Function;
 }
 
-export interface AvailablePokemonProps {
-  initialPokemons: Pokemon[];
+export interface PokemonProps {
+  pokemons: Pokemon[];
   user: string;
-}
-
-export interface UserPokemonProps {
-  user: string;
+  //makes this an optional property
+  removePokemonFromState?: Function;
+  addPokemonToState?: Function;
 }
