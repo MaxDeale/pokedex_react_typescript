@@ -1,6 +1,7 @@
 import React from "react";
 import "./pokeItem.css";
 import { PokemonItemProps, Pokemon } from "../types/types";
+import { useState, useEffect } from "react";
 import {
   getFirestore,
   collection,
@@ -20,9 +21,29 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
   const { name, image, types, abilities } = pokemon;
   const db = getFirestore();
 
+  const [owned, setIsOwned] = useState(false);
+
+  useEffect(() => {
+    const checkIfPokemonInCollection = async (
+      pokemonName: string
+    ): Promise<void> => {
+      // Reference the user's "pokemon" subcollection
+      const userPokemonCollection = collection(db, "pokemon");
+
+      // Query to find the specific Pokemon document by its name
+      const q = query(userPokemonCollection, where("name", "==", pokemonName));
+
+      // Get the documents that match the query
+      const querySnapshot = await getDocs(q);
+
+      setIsOwned(!querySnapshot.empty);
+    };
+    checkIfPokemonInCollection(name);
+  }, [db, name]);
+
   const handleAddPokemon = (pokemon: Pokemon): void => {
     addDoc(collection(db, "pokemon"), pokemon)
-      .then((docRef) => {
+      .then(() => {
         // Call the onAdd function passed from the parent component
         onAdd(pokemon);
         alert(pokemon.name + " successfully added!");
@@ -51,12 +72,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
 
       const pokemonDoc = querySnapshot.docs[0];
 
-      // Delete the document using its reference
       await deleteDoc(pokemonDoc.ref);
-
-      console.log(
-        "Pokemon with name " + pokemonName + " successfully removed."
-      );
       alert(pokemonName + " successfully removed!");
 
       // Call the onRemove function passed from the parent component
@@ -65,6 +81,10 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
       console.error("Error removing document: ", error);
     }
   };
+
+  const isAvailableFlow: boolean = flow === "available";
+  const isUserFlow: boolean = flow === "user";
+  const addText = !owned ? "add" : "owned";
 
   return (
     <div className="pokemon-card">
@@ -79,14 +99,16 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
           <span>Abilities:</span> {abilities.join(", ")}
         </p>
 
-        {flow === "available" ? (
+        {isAvailableFlow && (
           <button
             className="add-pokemon-button"
             onClick={() => handleAddPokemon(pokemon)}
+            disabled={owned}
           >
-            Add
+            {addText}
           </button>
-        ) : (
+        )}
+        {isUserFlow && (
           <button
             className="add-pokemon-button"
             onClick={() => handleRemovePokemon(name)}
