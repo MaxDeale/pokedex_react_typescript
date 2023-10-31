@@ -11,11 +11,13 @@ body {
 .top-container {
   margin: 20px auto;
   display: flex;
-  width: 35%;
+  width: 37%;
 }
 .top-container .main-logo-text {
   margin: 0 auto;
   align-self: center;
+  font-size: 3.2rem;
+  padding: 1rem;
   color: red;
 }
 .top-container img {
@@ -35,6 +37,9 @@ body {
   border-radius: 7px;
   padding: 5px;
 }
+.top-container nav ul li:hover {
+  transform: scale(1.06);
+}
 .top-container nav ul li a {
   transition: all 0.2s ease-in-out;
   letter-spacing: 1px;
@@ -42,5 +47,6 @@ body {
   color: red;
 }
 .top-container nav ul li a:hover {
+  transform: scale(1.02);
   color: yellow;
 }/*# sourceMappingURL=main.css.map */

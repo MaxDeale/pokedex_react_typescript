@@ -13,11 +13,13 @@ body {
 .top-container {
   margin: 20px auto;
   display: flex;
-  width: 35%;
+  width: 37%;
 
   .main-logo-text {
     margin: 0 auto;
     align-self: center;
+    font-size: 3.2rem;
+    padding: 1rem;
     color: red;
   }
 
@@ -42,6 +44,10 @@ body {
         border-radius: 7px;
         padding: 5px;
 
+        &:hover {
+          transform: scale(1.06);
+        }
+
         a {
           transition: all 0.2s ease-in-out;
           letter-spacing: 1px;
@@ -49,6 +55,7 @@ body {
           color: red;
 
           &:hover {
+            transform: scale(1.02);
             color: yellow;
           }
         }

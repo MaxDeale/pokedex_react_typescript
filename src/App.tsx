@@ -121,8 +121,7 @@ function App() {
     setUserPokemons(updatedPokemon);
   };
 
-  const addPokemonToState = (pokemon: Pokemon) => {
-    console.log("addingPokemonToState", pokemon);
+  const addPokemonToState = (pokemon: Pokemon): void => {
     const updatedPokemon = [...userPokemons, pokemon];
     setUserPokemons(updatedPokemon);
   };
