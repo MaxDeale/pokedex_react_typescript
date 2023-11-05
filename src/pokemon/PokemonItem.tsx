@@ -19,7 +19,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
   onRemove,
   onAdd,
 }) => {
-  const { name, image, types, abilities } = pokemon;
+  const { name, image, types, abilities, user: userEmail } = pokemon;
   const db = getFirestore();
 
   const [owned, setIsOwned] = useState(false);
@@ -43,8 +43,12 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
       // Reference the user's "pokemon" subcollection
       const userPokemonCollection = collection(db, "pokemon");
 
-      // Query to find the specific Pokemon document by its name
-      const q = query(userPokemonCollection, where("name", "==", pokemonName));
+      // Query to find the specific Pokemon document by its name and user
+      const q = query(
+        userPokemonCollection,
+        where("name", "==", pokemonName),
+        where("user", "==", userEmail)
+      );
 
       // Get the documents that match the query
       const querySnapshot = await getDocs(q);
@@ -52,7 +56,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
       setIsOwned(!querySnapshot.empty);
     };
     checkIfPokemonInCollection(name);
-  }, [db, name]);
+  }, [db, name, userEmail]);
 
   const handleAddPokemon = (pokemon: Pokemon): void => {
     addDoc(collection(db, "pokemon"), pokemon)
@@ -97,7 +101,7 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
 
   const isAvailableFlow: boolean = flow === "available";
   const isUserFlow: boolean = flow === "user";
-  const addText = !owned ? "add" : "owned";
+  const addText: string = !owned ? "add" : "owned";
 
   return (
     <div className="pokemon-card">
