@@ -12,6 +12,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { AVAILABLE_FLOW, USER_FLOW, ADD_TEXT, OWNED_TEXT } from "../constants/constants";
 
 const PokemonItem: React.FC<PokemonItemProps> = ({
   pokemon,
@@ -99,9 +100,9 @@ const PokemonItem: React.FC<PokemonItemProps> = ({
     }
   };
 
-  const isAvailableFlow: boolean = flow === "available";
-  const isUserFlow: boolean = flow === "user";
-  const addText: string = !owned ? "add" : "owned";
+  const isAvailableFlow: boolean = flow === AVAILABLE_FLOW;
+  const isUserFlow: boolean = flow === USER_FLOW;
+  const addText: string = !owned ? ADD_TEXT : OWNED_TEXT;
 
   return (
     <div className="pokemon-card">
